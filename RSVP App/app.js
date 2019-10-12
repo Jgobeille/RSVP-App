@@ -14,6 +14,7 @@ function createLi(text) {
     const button = document.createElement('button');
     button.textContent = 'remove';
     li.appendChild(button);
+    
     return li;
 }
 
