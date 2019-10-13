@@ -4,7 +4,9 @@ const ul = document.getElementById('invitedList');
 
 function createLi(text) {
     const li = document.createElement('li');
-    li.textContent = text;
+    const span = document.createElement('span');
+    span.textContent = text;
+    li.appendChild(span);
     const label = document.createElement('label');
     label.textContent = 'confirmed';
     const checkbox = document.createElement('input');
@@ -50,12 +52,22 @@ ul.addEventListener('change', (e) => {
 });
 
 ul.addEventListener('click', (e) => {
-    const button = e.target.className;
-    if(button === 'remove'){
-        const li = e.target.parentNode;
+    if (e.target.tagName === 'BUTTON') {
+        const button = e.target;
+        const li = button.parentNode;
         const ul = li.parentNode;
-        ul.removeChild(li);
-    } else if(button === 'edit') {
-        console.log('edit mode');
+        if(button.textContent === 'remove'){
+            ul.removeChild(li);
+        } else if(button.textContent === 'edit') {
+            const span = li.firstElementChild;
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.value = span.textContent;
+            li.insertBefore(input, span);
+            li.removeChild(span);
+            button.textContent = 'save';
+        }
     }
 });
+
+//Before watching vid try to figure out how to do save state. Maybe re-watch the end of the last vid?
