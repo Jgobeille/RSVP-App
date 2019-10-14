@@ -56,6 +56,7 @@ ul.addEventListener('click', (e) => {
         const button = e.target;
         const li = button.parentNode;
         const ul = li.parentNode;
+        
         if(button.textContent === 'remove'){
             ul.removeChild(li);
         } else if(button.textContent === 'edit') {
@@ -66,6 +67,14 @@ ul.addEventListener('click', (e) => {
             li.insertBefore(input, span);
             li.removeChild(span);
             button.textContent = 'save';
+        } else if(button.textContent === 'save'){
+            const newName = document.createElement('span');
+            const inputBox = li.firstElementChild;
+            const changeName = inputBox.value;
+            newName.innerHTML = changeName;
+            li.insertBefore(newName, inputBox);
+            li.removeChild(inputBox);
+            button.textContent = 'edit';
         }
     }
 });
