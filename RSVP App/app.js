@@ -67,10 +67,13 @@ document.addEventListener('DOMContentLoaded', () => {
             const button = e.target;
             const li = button.parentNode;
             const ul = li.parentNode;
-            
-            if(button.textContent === 'remove'){
+            const action = button.textContent;
+            //make functions objects
+            const nameActions = {
+            remove: () =>  { 
                 ul.removeChild(li);
-            } else if(button.textContent === 'edit') {
+            },
+            edit: () => {
                 const span = li.firstElementChild;
                 const input = document.createElement('input');
                 input.type = 'text';
@@ -78,14 +81,23 @@ document.addEventListener('DOMContentLoaded', () => {
                 li.insertBefore(input, span);
                 li.removeChild(span);
                 button.textContent = 'save';
-            } else if(button.textContent === 'save'){
+            }, 
+            save: () => {
                 const newName = document.createElement('span');
                 const inputBox = li.firstElementChild;
                 newName.innerHTML = inputBox.value;
                 li.insertBefore(newName, inputBox);
                 li.removeChild(inputBox);
                 button.textContent = 'edit';
-            }
+            } 
+        }
+            //select and run action in buttons name
+            /* This works by accessing the nameActions object via passing in
+                the name of the button name. Button name is edit so it accesses the edit name 
+                in the object. Then at the end of the one-liner a function is called so it will  
+                run the anonymous function located in object name 'edit'
+            */
+            nameActions[action]();
         }
     });
 
