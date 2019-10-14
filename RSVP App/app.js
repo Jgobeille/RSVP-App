@@ -70,8 +70,7 @@ ul.addEventListener('click', (e) => {
         } else if(button.textContent === 'save'){
             const newName = document.createElement('span');
             const inputBox = li.firstElementChild;
-            const changeName = inputBox.value;
-            newName.innerHTML = changeName;
+            newName.innerHTML = inputBox.value;
             li.insertBefore(newName, inputBox);
             li.removeChild(inputBox);
             button.textContent = 'edit';
@@ -79,4 +78,3 @@ ul.addEventListener('click', (e) => {
     }
 });
 
-//Before watching vid try to figure out how to do save state. Maybe re-watch the end of the last vid?
