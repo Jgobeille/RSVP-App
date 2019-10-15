@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const newName = document.createElement('span');
                 const inputBox = li.firstElementChild;
                 if(inputBox.value === ""){
-                alert('please enter a name');
+                inputBox.setAttribute('placeholder','Please enter a name here');
                 } else {
                 newName.innerHTML = inputBox.value;
                 li.insertBefore(newName, inputBox);
