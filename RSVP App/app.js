@@ -60,7 +60,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const li = createLi(text);
         
-        ul.appendChild(li);  
+        ul.appendChild(li);
+        // localStorage.setItem('names', JSON.stringify(ul.innerHTML));
+        // const getItems = localStorage.getItem('names');
+        // return JSON.parse(getItems);
     });
 
     ul.addEventListener('change', (e) => {
@@ -145,7 +148,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 /*
-Have feature that keeps empty strings out
 LocalStorage
 When filtering out confirmed guests, hide the the checkbox field
 
