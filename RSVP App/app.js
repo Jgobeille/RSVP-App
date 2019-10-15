@@ -38,15 +38,29 @@ document.addEventListener('DOMContentLoaded', () => {
         return li;
     }
 
+    function validation(input) {    
+        input.oninvalid = function(e) {
+            // Code found here: https://stackoverflow.com/questions/5272433/html5-form-required-attribute-set-custom-validation-message
+            e.target.setCustomValidity("");
+            if (!e.target.validity.valid) {
+                e.target.setCustomValidity("Please enter in a proper name");
+            }
+        };
+        input.oninput = function(e) {
+            e.target.setCustomValidity("");
+        };
+    }
+
     form.addEventListener('submit', (e) => {
         e.preventDefault();
+        
         const text = input.value;
+        
         input.value = "";
 
         const li = createLi(text);
         
-        ul.appendChild(li);
-        
+        ul.appendChild(li);  
     });
 
     ul.addEventListener('change', (e) => {
@@ -85,10 +99,15 @@ document.addEventListener('DOMContentLoaded', () => {
             save: () => {
                 const newName = document.createElement('span');
                 const inputBox = li.firstElementChild;
+                if(inputBox.value === ""){
+                alert('please enter a name');
+                } else {
                 newName.innerHTML = inputBox.value;
                 li.insertBefore(newName, inputBox);
                 li.removeChild(inputBox);
                 button.textContent = 'edit';
+                }
+
             } 
         }
             //select and run action in buttons name
@@ -121,4 +140,15 @@ document.addEventListener('DOMContentLoaded', () => {
             } 
         }
     });
+    validation(input);
 });
+
+
+/*
+Have feature that keeps empty strings out
+LocalStorage
+When filtering out confirmed guests, hide the the checkbox field
+
+
+
+*/
