@@ -7,6 +7,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const div = document.createElement('div');
     const filterLabel = document.createElement('label');
     const filterCheckBox = document.createElement('input');
+    const localStorageItems = [];
+    localStorageFunction();
 
 
     filterLabel.textContent = "Hide those who haven't responded";
@@ -14,6 +16,18 @@ document.addEventListener('DOMContentLoaded', () => {
     div.appendChild(filterLabel);
     div.appendChild(filterCheckBox);
     main.insertBefore(div, ul);
+
+    function localStorageFunction() {
+        const results = JSON.parse(localStorage.getItem('names'));
+        
+        results.forEach(item =>{
+            const li = createLi(item);
+            ul.appendChild(li);
+        });
+
+
+
+    }
 
     function createLi(text) {
         function createElement(elementName, property, value) {
@@ -27,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
             li.appendChild(element);
             return element;
         }
-
+        
         const li = document.createElement('li');
 
         appendToLi('span', 'textContent', text);
@@ -56,14 +70,14 @@ document.addEventListener('DOMContentLoaded', () => {
         
         const text = input.value;
         
+        
         input.value = "";
 
         const li = createLi(text);
-        
         ul.appendChild(li);
-        // localStorage.setItem('names', JSON.stringify(ul.innerHTML));
-        // const getItems = localStorage.getItem('names');
-        // return JSON.parse(getItems);
+        localStorageItems.push(text);
+        localStorage.setItem('names', JSON.stringify(localStorageItems));
+
     });
 
     ul.addEventListener('change', (e) => {
