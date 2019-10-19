@@ -19,14 +19,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function localStorageFunction() {
         const results = JSON.parse(localStorage.getItem('names'));
-        
         results.forEach(item =>{
             const li = createLi(item);
             ul.appendChild(li);
         });
-
-
-
     }
 
     function createLi(text) {
@@ -75,6 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const li = createLi(text);
         ul.appendChild(li);
+        //local Storage
         localStorageItems.push(text);
         localStorage.setItem('names', JSON.stringify(localStorageItems));
 
@@ -162,8 +159,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 /*
-LocalStorage
+Additions:
+
+LocalStorage edit, delete options
 When filtering out confirmed guests, hide the the checkbox field
+clear all options
 
 
 
